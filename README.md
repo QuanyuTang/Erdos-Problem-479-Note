@@ -6,11 +6,11 @@ $$
 2^n \equiv k \pmod n.
 $$
 
-For an integer $k$, define
+For an integer $k$, define $A(k)$ = { $n \ge 1 : 2^n \equiv k \pmod n$ }.
 
-$$
-A(k) = \{\, n \ge 1 : 2^n \equiv k \pmod n \,\}.
-$$
+
+
+
 
 Graham conjectured that for every $k \neq 1$, the set $A(k)$ is infinite. This is listed as Problem #479 on Bloom’s Erdős Problems website.
 
