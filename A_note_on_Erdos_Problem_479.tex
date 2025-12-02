@@ -1,0 +1,491 @@
+\documentclass[11pt,letterpaper,reqno]{amsart}
+\usepackage{tikz}
+\usetikzlibrary{positioning, shapes.geometric, arrows.meta, calc, positioning}
+\usepackage{amssymb}
+\usepackage{amsmath}
+\usepackage{amsthm}
+\usepackage{amsfonts}
+\usepackage{mathtools}
+\usepackage{bbm}
+\usepackage{enumitem} 
+\usepackage{pgfplots}
+\pgfplotsset{compat=1.18} 
+\usepackage{booktabs}
+\usepackage{graphicx}
+\usepackage[T1]{fontenc}
+\usepackage{doi}
+\usepackage{float} 
+\addtolength{\hoffset}{-1.5cm}\addtolength{\textwidth}{3cm}
+\addtolength{\voffset}{-1cm}\addtolength{\textheight}{2cm}
+
+\usepackage{bookmark}
+\usepackage{hyperref}
+\hypersetup{pdfstartview={FitH}}
+\newcommand{\C}{\mathbb{C}}
+\newcommand{\cE}{\mathcal{E}}
+\newcommand{\norm}[1]{\lVert #1 \rVert}
+\newcommand{\abs}[1]{| #1 |}
+\newcommand{\bv}{\mathbf{v}}
+\newcommand{\bw}{\mathbf{w}}
+\newcommand{\tr}{\operatorname{Tr}}
+\DeclareMathOperator{\rank}{rank}
+
+\newtheorem{thm}{Theorem}[section]
+\newtheorem{lem}[thm]{Lemma}
+\newtheorem{prop}[thm]{Proposition}
+\newtheorem{cor}[thm]{Corollary}
+\newtheorem{claim}{Claim}
+\newtheorem{ques}[thm]{Question}
+\newtheorem{prob}[thm]{Problem}
+\newtheorem{conj}[thm]{Conjecture}
+\theoremstyle{definition}
+\newtheorem{exm}[thm]{Example}
+\newtheorem{remark}[thm]{Remark}
+\newtheorem{defn}[thm]{Definition}
+\numberwithin{equation}{section}
+\newcommand{\N}{\mathbb{N}}
+\newcommand{\taufunc}{\tau}
+\newcommand{\omegap}{\omega}
+\newcommand{\ord}{\operatorname{ord}}
+\newcommand{\R}{\mathbb{R}}        % real numbers
+\newcommand{\E}{\mathbb{E}}        % expectation
+\newcommand{\Var}{\mathrm{Var}}    % variance
+\newcommand{\Cov}{\operatorname{Cov}}
+\newcommand{\PP}{\mathbb{P}}       % probability
+\newcommand{\eps}{\varepsilon}     % epsilon
+\newcommand{\ind}{\mathbf{1}}      % indicator function
+\newcommand{\seq}[1]{\left(#1\right)} % sequence
+\makeatother
+
+\begin{document}
+
+\title{A Note on Erd\H{o}s Problem~\#479:\\
+Infinitude of the Sets $A(2^i)$ and Related Results}
+
+
+\author[Q.~Tang]{Quanyu Tang}
+\date{\today}
+
+\address{School of Mathematics and Statistics, Xi'an Jiaotong University, Xi'an 710049, P. R. China}
+\email{tang\_quanyu@163.com}
+
+% \subjclass[2020]{}
+
+% \keywords{}
+
+% \begin{abstract}
+
+% \end{abstract}
+
+\maketitle
+
+\section{Introduction}
+
+For an integer $k$ we consider the congruence
+\begin{equation}\label{eq:main-congruence}
+2^n \equiv k \pmod n,
+\end{equation}
+and the associated set
+\[
+A(k) \coloneqq \{ n \ge 1 : 2^n \equiv k \pmod n\}.
+\]
+
+In \cite[p.~96]{ErdosGraham}, Graham proposed the following conjecture, which also appears as Problem~\#479 on Bloom’s Erd\H{o}s Problems website~\cite{EP479}.
+\begin{conj}\label{conj:479}
+Is it true that, for every integer $k\neq 1$, the set $A(k)$ is infinite?
+Equivalently, is it true that, for all $k\neq 1$, there are infinitely many $n$ such that $2^n\equiv k\pmod{n}$?
+\end{conj}
+
+It is easy to see that $2^n\not\equiv 1\pmod{n}$ for all $n>1$ (see, e.g., the proof reproduced on the OEIS wiki~\cite{OEIS2nmodn}), so the restriction $k\neq 1$ is necessary. In fact $A(1)=\{1\}$.
+
+In their monograph~\cite[p.~96]{ErdosGraham}, Erd\H{o}s and Graham attribute the following partial result to Graham, Lehmer and Lehmer:
+\begin{quote}
+\emph{This is known to be true (see [Gr-Leh-Leh(xx)]) if $k=2^i$, $i\geq 1$, and $k=-1$.}
+\end{quote}
+However, [Gr-Leh-Leh(xx)] refers to an unpublished manuscript, and, as noted on Bloom’s Erd\H{o}s Problems website~\cite{EP479}, no published version of this manuscript seems to exist; it also does not appear in the standard bibliographies of Graham or D.~H.\ Lehmer.
+
+We remark that the statement for $k=-1$ is now standard: numbers $n$ with $n\mid 2^n+1$ are called Nov\'ak numbers, and their infinitude is well established (see Kalmynin~\cite{Kalmynin} and OEIS~\cite{A006521}).
+
+The main purpose of this note is twofold:
+\begin{itemize}
+  \item in Section~\ref{sec:2} we survey the existing results and record those integers $k$ for which $A(k)$ is currently known to be infinite;
+  \item and, for completeness, in Section~\ref{sec:2^i} we give an explicit proof of the case $k=2^i$, $i\ge1$.
+\end{itemize}
+
+
+
+We do \emph{not} claim any of the underlying number-theoretic statements as new; the novelty here is only expository. The proof in Section~\ref{sec:2^i} is an independent argument using multiplicative orders and Dirichlet's theorem, and may or may not coincide with the (unpublished) proof of Graham--Lehmer--Lehmer~\cite{GrLehLeh}.
+
+
+
+% For $k=-2$ the existence of infinitely many $n$ with $n\mid 2^n+2$ is a consequence of work of Li et al.\ on an IMO problem~\cite{LiExcalibur}, and is recorded as OEIS~\cite{A006517}.
+
+
+\section{Known results and OEIS data}\label{sec:2}
+
+\subsection{The sets \texorpdfstring{$A(k)$}{A(k)} and OEIS entries}
+
+For each fixed integer $k$, the set $A(k)$ collects all positive integers $n$ with
+\[
+n \mid 2^n - k.
+\]
+The online database OEIS contains separate entries for many of these sets. A convenient starting point is the OEIS wiki page \emph{$2^n \bmod n$}~\cite{OEIS2nmodn} and the cross-references on the page for $A334634$~\cite{A334634}. In particular, the following table of integer values of $k$ for which $A(k)$ has its own OEIS entry is adapted from the table on the OEIS wiki page~\cite{OEIS2nmodn}.
+
+
+\begin{table}[H]
+\centering
+\begin{tabular}{r l}
+\toprule
+$k$ & OEIS entry for $A(k)$ \\
+\midrule
+$-11$ & \href{https://oeis.org/A334634}{A334634} \\
+$-10$ & \href{https://oeis.org/A245594}{A245594} \\
+$-9$  & \href{https://oeis.org/A240942}{A240942} \\
+$-8$  & \href{https://oeis.org/A245319}{A245319} \\
+$-7$  & \href{https://oeis.org/A240941}{A240941} \\
+$-6$  & \href{https://oeis.org/A245728}{A245728} \\
+$-5$  & \href{https://oeis.org/A245318}{A245318} \\
+$-4$  & \href{https://oeis.org/A244673}{A244673} \\
+$-3$  & \href{https://oeis.org/A015940}{A015940} \\
+$-2$  & \href{https://oeis.org/A006517}{A006517} \\
+$-1$  & \href{https://oeis.org/A006521}{A006521} \\
+$0$   & \href{https://oeis.org/A000079}{A000079} \\
+\midrule
+$2$   & \href{https://oeis.org/A015919}{A015919} \\
+$3$   & \href{https://oeis.org/A050259}{A050259} \\
+$4$   & \href{https://oeis.org/A015921}{A015921} \\
+$5$   & \href{https://oeis.org/A128121}{A128121} \\
+$6$   & \href{https://oeis.org/A128122}{A128122} \\
+$7$   & \href{https://oeis.org/A033981}{A033981} \\
+$8$   & \href{https://oeis.org/A015922}{A015922} \\
+$9$   & \href{https://oeis.org/A051447}{A051447} \\
+$10$  & \href{https://oeis.org/A128123}{A128123} \\
+$11$  & \href{https://oeis.org/A033982}{A033982} \\
+$12$  & \href{https://oeis.org/A128124}{A128124} \\
+$13$  & \href{https://oeis.org/A051446}{A051446} \\
+$14$  & \href{https://oeis.org/A128125}{A128125} \\
+$15$  & \href{https://oeis.org/A033983}{A033983} \\
+$16$  & \href{https://oeis.org/A015924}{A015924} \\
+$17$  & \href{https://oeis.org/A124974}{A124974} \\
+$18$  & \href{https://oeis.org/A128126}{A128126} \\
+$19$  & \href{https://oeis.org/A125000}{A125000} \\
+\midrule
+$32=2^5$    & \href{https://oeis.org/A015925}{A015925} \\
+$64=2^6$    & \href{https://oeis.org/A015926}{A015926} \\
+$128=2^7$   & \href{https://oeis.org/A015927}{A015927} \\
+$256=2^8$   & \href{https://oeis.org/A015929}{A015929} \\
+$512=2^9$   & \href{https://oeis.org/A015931}{A015931} \\
+$1024=2^{10}$ & \href{https://oeis.org/A015932}{A015932} \\
+$2048=2^{11}$ & \href{https://oeis.org/A015935}{A015935} \\
+$4096=2^{12}$ & \href{https://oeis.org/A015937}{A015937} \\
+\bottomrule
+\end{tabular}
+\caption{Integer values of $k$ for which $A(k)$ currently has a dedicated OEIS entry (from the cross-references in~\cite{A334634}).}
+\label{tab:OEIS}
+\end{table}
+For $k=1$ one has $A(1)=\{1\}$; this trivial case is discussed on the OEIS wiki~\cite{OEIS2nmodn}, but (reasonably) does not have its own numbered sequence.
+
+\subsection{Values of \texorpdfstring{$k$}{k} with \texorpdfstring{$A(k)$}{A(k)} known to be infinite}
+
+We now summarize what is currently known about the infinitude of $A(k)$.
+
+\subsubsection{The trivial cases}
+
+\begin{itemize}
+  \item $k=0$: Here $2^n\equiv 0\pmod n$ if and only if $n$ is a power of $2$. Thus
+  \[
+  A(0)=\{2^m : m\ge0\},
+  \]
+  and $A(0)$ is clearly infinite. This is recorded as \href{https://oeis.org/A000079}{A000079} in the OEIS.
+
+  \item $k=2$: For every odd prime $p$ we have $2^{p-1}\equiv 1\pmod p$ and hence
+  \[
+  2^p\equiv 2\pmod p.
+  \]
+  Thus all odd primes lie in $A(2)$, so $A(2)$ is infinite. This is sequence \href{https://oeis.org/A015919}{A015919}. 
+\end{itemize}
+
+\subsubsection{The Nov\'ak numbers: \texorpdfstring{$k=-1$}{k=-1}}
+
+Numbers $n$ with $n\mid 2^n+1$ are called \emph{Nov\'ak numbers}. They form OEIS sequence \href{https://oeis.org/A006521}{A006521}. It is easy to see, using the lifting-the-exponent (LTE) lemma, that
+\[
+3^{m+1} \mid 2^{3^m}+1
+\]
+for every $m\ge0$, so in particular $3^m\in A(-1)$ for all $m$. Kalmynin~\cite{Kalmynin} gives quantitative lower bounds for the counting function of Nov\'ak numbers, confirming that there are infinitely many such $n$. Thus the set $A(-1)$ is infinite.
+
+\subsubsection{Numbers with \texorpdfstring{$n\mid 2^n+2$}{n|2^n+2}: \texorpdfstring{$k=-2$}{k=-2}}
+
+The set
+\[
+A(-2)=\{n\ge1 : n\mid 2^n+2\}
+\]
+is OEIS \href{https://oeis.org/A006517}{A006517}. Kin Y.~Li et al.\ showed in \cite{LiExcalibur} that $A(-2)$ is infinite.
+
+
+
+\subsubsection{The powers of two: \texorpdfstring{$k=2^i$}{k=2^i}}
+
+Erd\H{o}s and Graham state (without proof) that Graham, Lehmer and Lehmer showed $A(2^i)$ is infinite for every integer $i\ge1$~\cite[p.~96]{ErdosGraham}. We have not been able to locate a published proof of this statement, nor the original Graham--Lehmer--Lehmer manuscript. In Section~\ref{sec:2^i} below we give an explicit proof that $A(2^i)$ is infinite for every $i\ge1$, using multiplicative orders and Dirichlet's theorem on primes in arithmetic progressions.
+
+For $i=1$ this reduces to the case $k=2$ discussed above; for $i\ge2$ this seems not to be written down in detail elsewhere. The sequences $A(2^i)$ for $i=1,2,3,\dots$ correspond to the OEIS entries
+\[
+\text{A015919, A015921, A015922, A015924, A015925, A015926, \dots}, 
+\]
+cf.\ Table~\ref{tab:OEIS}.
+
+\subsubsection{Other values of \texorpdfstring{$k$}{k}}
+
+For the remaining $k$ appearing in Table~\ref{tab:OEIS} (for example $k=3,5,-3,-4,\dots$), the current state of knowledge is essentially experimental:
+
+\begin{itemize}
+  \item for many $k$ at least one solution $n\in A(k)$ is known, sometimes astronomically large (e.g.\ $k=3$ has a known solution $n=4700063497$, see \href{https://oeis.org/A050259}{A050259});
+  \item but for no such $k$ (besides those listed above) has it been proved that $A(k)$ is infinite, nor even that $A(k)$ is nonempty beyond a finite list of experimentally found $n$.
+\end{itemize}
+
+In particular, Conjecture~\ref{conj:479} remains open for every fixed $k$ other than
+\[
+k\in\{0,1,-1,-2, 2^i : i\ge1\}.
+\]
+
+\section{The case \texorpdfstring{$k=2^i$}{k = 2^i}}\label{sec:2^i}
+
+% In this section we give an explicit argument showing that for every fixed integer $i\ge1$ there are infinitely many $n$ with
+% \[
+% 2^n\equiv 2^i \pmod n.
+% \]
+% This is the case $k=2^i$ of Graham's conjecture. As mentioned above, the result is not new: Erd\H{o}s and Graham already state it (with attribution to Graham--Lehmer--Lehmer) in~\cite{ErdosGraham}. The proof below is presented for completeness and uses only standard facts about multiplicative orders and Dirichlet's theorem on primes in arithmetic progressions (see, e.g., Davenport~\cite{Davenport}).
+
+\begin{thm}\label{thm:2^i}
+Let $i\ge 1$ be an integer. Then there exist infinitely many positive integers $n$ such that
+\[
+2^n \equiv 2^i \pmod n.
+\]
+Equivalently, $A(2^i)$ is infinite for every $i\ge1$.
+\end{thm}
+
+\begin{proof}
+Fix $i\ge1$. We shall construct infinitely many integers $n$ of the form
+\[
+n = i p,
+\]
+where $p$ runs over an infinite set of primes depending on $i$.
+
+Let $p$ be an odd prime with $p\nmid i$, and set $n=ip$. By Fermat's little theorem,
+\[
+2^{p-1}\equiv 1\pmod p,
+\]
+hence
+\[
+2^p = 2\cdot 2^{p-1}\equiv 2\pmod p.
+\]
+Therefore
+\[
+2^n = 2^{ip} = (2^p)^i \equiv 2^i \pmod p
+\]
+for every such prime $p$. Thus
+\[
+p \mid (2^n-2^i)
+\]
+holds automatically for all odd primes $p$, independently of any further conditions.
+
+Now, we must ensure additionally that
+\[
+i \mid (2^n-2^i).
+\]
+Write a prime power factorization
+\[
+i = 2^s \prod_{j=1}^t q_j^{e_j},
+\]
+where $s\ge0$, $t\ge0$, and $q_1,\dots,q_t$ are distinct odd primes. We have
+\[
+2^n - 2^i = 2^i\bigl(2^{i(p-1)}-1\bigr),
+\]
+so it suffices to guarantee that each odd prime power $q_j^{e_j}$ divides $2^{i(p-1)}-1$ (the $2$-power part will be handled separately). Since $\gcd(2,q_j)=1$, $2$ is invertible modulo $q_j^{e_j}$, and the condition
+\[
+2^{i(p-1)}\equiv1\pmod{q_j^{e_j}}
+\]
+is equivalent to the statement that the multiplicative order
+\[
+d_j \coloneqq \ord_{q_j^{e_j}}(2)
+\]
+divides $i(p-1)$. Let
+\[
+g_j \coloneqq \gcd(d_j,i),\qquad m_j \coloneqq \frac{d_j}{g_j}.
+\]
+Then $d_j\mid i(p-1)$ is equivalent to $m_j\mid (p-1)$: indeed, writing $d_j=g_j m_j$ and $i=g_j v_j$ with $\gcd(m_j,v_j)=1$, we have
+\[
+d_j \mid i(p-1)\iff g_j m_j \mid g_j v_j (p-1)\iff m_j\mid(p-1).
+\]Thus, for each odd prime power $q_j^{e_j}\parallel i$, the requirement that $q_j^{e_j}$ divides $2^{i(p-1)}-1$ is equivalent to the congruence
+\[
+p\equiv 1\pmod{m_j}.
+\] Since $2^s\mid i$ and $2^s\mid 2^i$, automatically
+\[
+2^s \mid 2^i\mid 2^i\bigl(2^{i(p-1)}-1\bigr) = 2^n-2^i
+\]
+for every $p$. Thus the $2$-part of $i$ imposes no restriction on $p$.
+
+
+Let
+\[
+L \coloneqq \operatorname{lcm}(m_1,\dots,m_t),
+\]
+with the convention that $L=1$ if $t=0$ (i.e., if $i$ has no odd prime factors). If $p$ is a prime such that
+\[
+p\equiv 1\pmod L
+\quad\text{and}\quad
+p\nmid i,
+\]
+then for every $j$ we have $p\equiv 1\pmod{m_j}$ and hence $q_j^{e_j}\mid 2^{i(p-1)}-1$, as required. As we have just seen, $2^s$ automatically divides $2^n-2^i$, and we have already observed that $p\mid 2^n-2^i$ always holds. Moreover, by construction $\gcd(i,p)=1$, so the prime factors of $i$ and $p$ are disjoint. Thus the divisibility
+\[
+i \mid (2^n-2^i)
+\quad\text{and}\quad
+p \mid (2^n-2^i)
+\]
+combine to give
+\[
+ip \mid (2^n-2^i).
+\]
+In other words, for any such $p$,
+\[
+2^{ip} \equiv 2^i \pmod{ip},
+\]
+so $n=ip$ lies in $A(2^i)$.
+
+
+It remains to show that there are infinitely many primes $p$ with
+\[
+p\equiv 1\pmod L,\qquad p\nmid i.
+\]
+Since $L\ge1$ is fixed and $\gcd(1,L)=1$, Dirichlet's theorem on primes in arithmetic progressions implies that there are infinitely many primes $p\equiv 1\pmod L$. Excluding the finitely many primes dividing $i$ still leaves infinitely many such $p$. For each of these primes $p$, the integer $n=ip$ satisfies $2^n\equiv2^i\pmod n$, and the resulting values $n$ are clearly distinct and unbounded. Hence $A(2^i)$ is infinite, as claimed.
+\end{proof}
+
+To make the mechanism of the proof of Theorem~\ref{thm:2^i} more transparent, let us examine in detail what the construction produces when $i=3$.
+
+
+\begin{exm}
+Taking $i=3$, we have $i=3=2^0\cdot 3$, so the only odd prime factor is $q_1=3$ with $e_1=1$. The multiplicative order of $2$ modulo $3$ is
+\[
+d_1 = \ord_3(2) = 2.
+\]
+Thus
+\[
+g_1 = \gcd(d_1,3) = 1,\qquad m_1 = \frac{d_1}{g_1} = 2,
+\]
+and hence
+\[
+L = \operatorname{lcm}(m_1) = 2.
+\]
+According to the proof of Theorem~\ref{thm:2^i}, any prime $p$ with
+\[
+p \equiv 1 \pmod{L}, \qquad p \nmid i
+\]
+gives a solution $n = ip = 3p$. In this case $L=2$, so $p$ can be any odd prime different from $3$. For instance,
+\[
+p = 5,7,11,13,17,19,\dots
+\]
+yield
+\[
+n = 15,21,33,39,51,57,\dots,
+\]
+and one checks that $2^n \equiv 8 \pmod n$ for all these $n$.
+
+Comparing with the OEIS entry \href{https://oeis.org/A015922}{A015922}, which begins
+\[
+1,2,3,4,8,9,15,21,33,39,51,57,63,69,\dots,
+\]
+we see that all the integers $3p$ produced by this construction indeed belong to $A(8)$.
+\end{exm}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+\begin{thebibliography}{99}
+\bibitem{EP479}
+T. F. Bloom, Erd\H{o}s Problem~\#479, \url{https://www.erdosproblems.com/479}, accessed 2025-12-02
+
+
+
+% \bibitem{Davenport}
+% H.~Davenport, \textit{Multiplicative Number Theory}, 3rd ed., Graduate Texts in Mathematics, vol.~74, Springer, 2000.
+
+\bibitem{ErdosGraham}
+P.~Erd\H{o}s and R.~L.~Graham,
+\textit{Old and New Problems and Results in Combinatorial Number Theory},
+Monographie No.~28 de L'Enseignement Math\'ematique, Geneva, 1980.
+
+\bibitem{GrLehLeh}
+R.~L.~Graham, D.~H.~Lehmer and E.~Lehmer,
+\emph{On values of $2^n$ modulo $n$}, unpublished manuscript; cited (as [Gr-Leh-Leh(xx)]) in~\cite{ErdosGraham}.
+
+
+% \bibitem{Honsberger}
+% R.~Honsberger, \textit{Mathematical Gems}, Dolciani Mathematical Expositions, MAA, 1973.
+
+\bibitem{Kalmynin}
+A.~Kalmynin, On Nov\'ak numbers,
+\textit{Sb.\ Math.} \textbf{209} (2018), no.~4, 520--541; see also arXiv:\href{https://arxiv.org/abs/1611.00417}{1611.00417}.
+
+\bibitem{LiExcalibur}
+Kin Y.~Li et al.,
+Solution to Problem 323,
+\textit{Mathematical Excalibur} \textbf{14} (2009), no.~2, 3--4.
+(\href{http://www.math.ust.hk/excalibur/v14_n2.pdf}{online})
+
+% \bibitem{Sierpinski}
+% W.~Sierpi\'nski,
+% \textit{250 Problems in Elementary Number Theory},
+% Elsevier, New York, 1970.
+
+\bibitem{OEIS2nmodn}
+OEIS Wiki, \textit{$2^n \bmod n$},
+The On-Line Encyclopedia of Integer Sequences,
+\href{https://oeis.org/wiki/2%5En_mod_n}{https://oeis.org/wiki/2\%5En\_mod\_n}.
+
+\bibitem{A006521}
+N.~J.~A.~Sloane et al.,
+OEIS sequence \href{https://oeis.org/A006521}{A006521}:
+Numbers $n$ such that $n$ divides $2^n+1$ (Nov\'ak numbers).
+
+% \bibitem{A006517}
+% N.~J.~A.~Sloane et al.,
+% OEIS sequence \href{https://oeis.org/A006517}{A006517}:
+% Numbers $n$ such that $n$ divides $2^n+2$.
+
+% \bibitem{MOA006517}
+% M.~Alekseyev,
+% \emph{A006517: integers with $n\mid 2^n+2$},
+% MathOverflow discussion and OEIS comments, 2012--2019.
+
+\bibitem{A334634}
+M.~Alekseyev,
+OEIS sequence \href{https://oeis.org/A334634}{A334634}:
+Numbers $m$ such that $m$ divides $2^m+11$, with detailed cross-references to all integer $k$ for which $A(k)$ has an OEIS entry.
+
+\end{thebibliography}
+
+\end{document}
