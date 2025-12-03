@@ -47,7 +47,7 @@ However, no published proof appears to exist, nor does the manuscript appear in 
 
 ---
 
-## 🔗 Related links
+## Related links
 
 - Erdős Problem #479: https://www.erdosproblems.com/479  
 - OEIS “2^n (mod n)” page: https://oeis.org/wiki/2%5En_mod_n  
@@ -55,7 +55,7 @@ However, no published proof appears to exist, nor does the manuscript appear in 
 
 ---
 
-## ✒ Citation
+## Citation
 
 If you wish to cite this note, use:
 
