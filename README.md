@@ -1,6 +1,6 @@
 # A Note on Erdős Problem #479
 
-This repository contains an expository note on Erdős Problem #479 concerning the congruence
+This repository contains an expository note on Erdős Problem #479 (https://www.erdosproblems.com/479) concerning the congruence
 
 $$
 2^n \equiv k \pmod n.
