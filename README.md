@@ -36,8 +36,6 @@ However, no published proof appears to exist, nor does the manuscript appear in 
 
 ## Contribution of this note
 
-This note serves two purposes:
-
 - in Section 2 we survey the existing results and record those integers $k$ for which $A(k)$ is currently known to be infinite;
 - and, for completeness, in Section 3 we give an explicit proof of the infinitude of $A(2^i)$, using multiplicative orders and Dirichlet’s theorem.
 
@@ -52,8 +50,8 @@ This note serves two purposes:
 ## 🔗 Related links
 
 - Erdős Problem #479: https://www.erdosproblems.com/479  
-- OEIS “$2^n \mod n$” page: https://oeis.org/wiki/2%5En_mod_n  
-- OEIS entry for \(A(8)\): https://oeis.org/A015922  
+- OEIS “2^n (mod n)” page: https://oeis.org/wiki/2%5En_mod_n  
+- OEIS entry for $A(8)$: https://oeis.org/A015922  
 
 ---
 
@@ -63,7 +61,7 @@ If you wish to cite this note, use:
 
 
 
-Q. Tang, *A Note on Erdős Problem #479: Infinitude of the Sets A(2^i) and Related Results*, December 2, 2025.  
+Quanyu Tang, *A Note on Erdős Problem #479: Infinitude of the Sets A(2^i) and Related Results*, December 2, 2025.  
 GitHub: https://github.com/QuanyuTang/Erdos-Problem-479-Note
 
 
