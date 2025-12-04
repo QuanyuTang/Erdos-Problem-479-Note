@@ -37,7 +37,7 @@ However, no published proof appears to exist, nor does the manuscript appear in 
 ## Contribution of this note
 
 - in Section 2 we survey the existing results and record those integers $k$ for which $A(k)$ is currently known to be infinite;
-- and, for completeness, in Section 3 we give an explicit proof of the infinitude of $A(2^i)$, using multiplicative orders and Dirichlet’s theorem.
+- and, for completeness, in Section 3 we give an explicit proof of the infinitude of $A(2^i)$, using Dirichlet’s theorem on primes in arithmetic progressions.
 
 
 ## Files
